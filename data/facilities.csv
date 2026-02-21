@@ -1,0 +1,9 @@
+facility_id,facility_name,type,daily_demand
+MEDICAL_CENTER,Campus Medical Center,Critical,90
+ENGINEERING_BLOCK,Engineering Block,Academic,40
+SCIENCE_BLOCK,Science Complex,Academic,45
+BOYS_HOSTEL,Boys Hostel,Residential,60
+GIRLS_HOSTEL,Girls Hostel,Residential,55
+CENTRAL_LIBRARY,Central Library,Academic,30
+FOOD_COURT,Food Court,Essential,50
+SPORTS_COMPLEX,Sports Complex,Recreational,35

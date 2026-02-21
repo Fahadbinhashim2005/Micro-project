@@ -1,0 +1,5 @@
+warehouse_id,warehouse_name,daily_capacity,construction_cost,operational_cost_per_day
+WH_NORTH,North Depot,420,310000,850
+WH_SOUTH,South Depot,380,295000,780
+WH_EAST,East Depot,450,330000,910
+WH_WEST,West Depot,400,305000,820
