@@ -1,9 +1,14 @@
 facility_id,facility_name,type,daily_demand
-MEDICAL_CENTER,Campus Medical Center,Critical,90
-ENGINEERING_BLOCK,Engineering Block,Academic,40
-SCIENCE_BLOCK,Science Complex,Academic,45
-BOYS_HOSTEL,Boys Hostel,Residential,60
-GIRLS_HOSTEL,Girls Hostel,Residential,55
-CENTRAL_LIBRARY,Central Library,Academic,30
-FOOD_COURT,Food Court,Essential,50
-SPORTS_COMPLEX,Sports Complex,Recreational,35
+RB_BLOCK,RB Block,Academic,45
+VB_BLOCK,VB Block,Academic,40
+CLC_BLOCK,CLC Block,Academic,35
+AB_BLOCK,AB Block,Academic,42
+NORTH_BLOCK,North Block,Academic,38
+SOUTH_BLOCK,South Block,Academic,36
+AMENITY_BLOCK,Amenity Block,Essential,50
+AK_BLOCK,AK Block,Academic,37
+MINI_AUDITORIUM,Mini Auditorium,Event,30
+AMPHITHEATRE,Amphitheatre,Event,28
+CENTRAL_COMPLEX,Central Complex,Essential,55
+LAB_BLOCKS,Engineering Lab Blocks,Critical,48
+MAIN_ENTRY,Main Entry & Security,Logistics,25
