@@ -1,139 +1,198 @@
-# Campus City Logistics – Emergency Supply Distribution Optimization
+# Smart Campus Logistics Optimization
 
-## Problem Statement
-As an optimization analyst for **Campus City Logistics**, the objective is to design an optimal emergency supply distribution network to serve essential campus facilities. The existing manual distribution approach is inefficient, costly, and lacks redundancy during emergency scenarios. A data-driven optimization model is required to ensure reliable and cost-effective supply allocation.
+A data-driven system that optimizes emergency supply distribution across a university campus using operations research techniques.
 
----
-
-## Goal
-Determine the optimal warehouse selection and supply distribution plan that:
-
-- Minimizes total annual operational cost  
-- Satisfies demand at all campus facilities  
-- Respects warehouse capacity limitations  
-- Ensures redundancy through controlled warehouse selection  
-- Operates within the allocated annual budget  
+This project uses mathematical optimization to determine the best warehouse locations and supply routes so that campus facilities receive resources efficiently while minimizing operational cost.
 
 ---
 
-## Dataset Overview
+# Problem Statement
 
-### Facilities Data
-Eight essential campus facilities were considered for emergency supply planning.
+Large campuses contain many facilities such as academic blocks, laboratories, event spaces, and service areas. These locations require a continuous supply of essential resources such as food, medicine, and water.
 
-| Facility ID | Facility Name | Type | Daily Demand (Units) |
-|------------|---------------|------|----------------------|
-| MEDICAL_CENTER | Campus Medical Center | Critical | 90 |
-| ENGINEERING_BLOCK | Engineering Block | Academic | 40 |
-| SCIENCE_BLOCK | Science Complex | Academic | 45 |
-| BOYS_HOSTEL | Boys Hostel | Residential | 60 |
-| GIRLS_HOSTEL | Girls Hostel | Residential | 55 |
-| CENTRAL_LIBRARY | Central Library | Academic | 30 |
-| FOOD_COURT | Food Court | Essential | 50 |
-| SPORTS_COMPLEX | Sports Complex | Recreational | 35 |
+Manual logistics planning can lead to:
 
-**Total Daily Demand ≈ 405 Units/Day**
+- inefficient resource allocation  
+- higher transportation costs  
+- delays in delivery  
+- lack of redundancy during emergencies  
+
+To address this problem, this project builds an **optimization model** that automatically determines the most efficient logistics configuration.
 
 ---
 
-### Warehouse Data
+# Project Goals
 
-| Warehouse ID | Warehouse Name | Daily Capacity (Units) | Construction Cost | Operational Cost / Day |
-|-------------|---------------|------------------------|-------------------|------------------------|
-| WH_NORTH | North Depot | 420 | $310,000 | $850 |
-| WH_SOUTH | South Depot | 380 | $295,000 | $780 |
-| WH_EAST | East Depot | 450 | $330,000 | $910 |
-| WH_WEST | West Depot | 400 | $305,000 | $820 |
+The system determines the optimal warehouse selection and supply distribution plan that:
 
-**Total Available Capacity = 1,650 Units/Day**
-
----
-
-### Transportation Costs
-
-| Parameter | Value |
-|---------|-------|
-| Cost Range | $3.6 – $4.8 per unit |
-| Basis | Relative campus distance and accessibility |
+- minimizes total annual logistics cost
+- satisfies demand at all campus facilities
+- respects warehouse capacity constraints
+- ensures redundancy through multiple warehouses
+- operates within the available logistics budget
 
 ---
 
-## Financial Constraints
+# Dataset Overview
 
-| Parameter | Value |
-|---------|-------|
-| Annual Budget | $2,000,000 |
-| Planning Period | 365 Days |
-| Construction Amortization | 8 Years |
+## Campus Facilities
+
+The optimization model considers several important campus locations.
+
+| Facility | Type | Daily Demand |
+|--------|------|-------------|
+| RB Block | Academic | 45 |
+| VB Block | Academic | 40 |
+| CLC Block | Academic | 35 |
+| AB Block | Academic | 42 |
+| North Block | Academic | 38 |
+| South Block | Academic | 36 |
+| Amenity Block | Essential | 50 |
+| AK Block | Academic | 37 |
+| Mini Auditorium | Event | 30 |
+| Amphitheatre | Event | 28 |
+| Central Complex | Essential | 55 |
+| Engineering Labs | Critical | 48 |
+| Main Entry | Logistics | 25 |
+
+Each facility has an estimated **daily resource demand**.
 
 ---
 
-## Solution Approach
+## Warehouse Locations
 
-### Optimization Technique
-The problem is formulated as a **Mixed Integer Linear Programming (MILP)** model and implemented using the **PuLP** optimization library in Python.
+Four possible warehouse locations are evaluated.
+
+| Warehouse | Capacity | Construction Cost | Operational Cost / Day |
+|----------|----------|------------------|------------------------|
+| WH_NORTH | 420 | $310,000 | $850 |
+| WH_SOUTH | 380 | $295,000 | $780 |
+| WH_EAST | 450 | $330,000 | $910 |
+| WH_WEST | 400 | $305,000 | $820 |
+
+The optimization model automatically selects the best warehouse combination.
 
 ---
 
-### Decision Variables
+# Optimization Model
+
+The logistics network is formulated as a **Mixed Integer Linear Programming (MILP)** problem.
+
+The model determines:
+
+- which warehouses should be activated
+- how resources should be distributed
+- the most cost-efficient supply network
+
+---
+
+## Decision Variables
 
 | Variable | Type | Description |
 |--------|------|-------------|
-| Warehouse Activation | Binary | 1 if warehouse is selected, 0 otherwise |
-| Shipment Quantity | Continuous | Annual units shipped from warehouse to facility |
+| Warehouse Activation | Binary | Indicates whether a warehouse is selected |
+| Shipment Quantity | Continuous | Quantity shipped from warehouse to facility |
 
 ---
 
-## Optimization Results
+## Objective
 
-### Financial Summary
+The system minimizes total annual logistics cost including:
 
-| Metric | Value |
-|------|-------|
-| Total Annual Cost | $1,255,957.50 |
-| Construction Cost (Annualized) | Included |
-| Operational Cost | Included |
-| Transportation Cost | Included |
-| Remaining Budget | $744,042.50 |
+- warehouse construction cost
+- warehouse operational cost
+- transportation cost based on geographic distance
 
 ---
 
-### Selected Warehouses
+# Optimization Results
+
+After solving the model, the system identifies the most efficient logistics configuration.
+
+## Selected Warehouses
 
 | Warehouse | Selected |
-|---------|----------|
+|----------|----------|
 | WH_SOUTH | Yes |
 | WH_WEST | Yes |
 | WH_NORTH | No |
 | WH_EAST | No |
 
----
-
-### Distribution Plan (Annual Units)
-
-| Warehouse | Facility | Units Shipped |
-|---------|----------|---------------|
-| WH_SOUTH | MEDICAL_CENTER | 32,850 |
-| WH_SOUTH | ENGINEERING_BLOCK | 14,600 |
-| WH_SOUTH | SCIENCE_BLOCK | 16,425 |
-| WH_SOUTH | BOYS_HOSTEL | 21,900 |
-| WH_SOUTH | GIRLS_HOSTEL | 20,075 |
-| WH_SOUTH | FOOD_COURT | 18,250 |
-| WH_SOUTH | SPORTS_COMPLEX | 12,775 |
-| WH_WEST | CENTRAL_LIBRARY | 9,125 |
+These warehouses provide the most cost-efficient distribution network.
 
 ---
 
-## Technologies Used
+## Example Distribution Plan
+
+| Warehouse | Facility | Annual Units |
+|----------|----------|--------------|
+| WH_SOUTH | RB Block | 16,425 |
+| WH_SOUTH | VB Block | 14,600 |
+| WH_SOUTH | AB Block | 15,330 |
+| WH_WEST | Central Complex | 20,075 |
+
+The model distributes supplies to all facilities while satisfying demand constraints.
+
+---
+
+# Visualization
+
+The system generates a geographic map showing:
+
+- campus facilities
+- selected warehouses
+- optimized supply routes
+- distance between locations
+
+Example output:
+
+![Campus Logistics Map](campus_map.png)
+
+---
+
+# Technologies Used
 
 | Technology | Purpose |
 |-----------|--------|
-| Python | Programming and modeling |
-| PuLP | MILP optimization |
-| Pandas | Data processing and validation |
-| CBC Solver | Optimization engine |
+| Python | Core programming language |
+| Pandas | Data processing |
+| PuLP | Optimization modelling |
+| CBC Solver | Linear programming solver |
+| Folium | Interactive map visualization |
+| LaTeX | Academic report preparation |
 
 ---
 
-## Conclusion
-The MILP-based optimization model successfully identifies the most cost-effective and reliable emergency supply distribution strategy for the campus. The selected warehouses minimize total annual cost while satisfying all facility demands and capacity constraints. The model demonstrates strong scalability and can be extended to incorporate additional facilities, budget scenarios, or sustainability constraints, making it suitable for real-world campus logistics planning.
+# Project Structure
+Micro-project
+│
+├── data
+│ ├── facilities.csv
+│ ├── warehouses.csv
+│ ├── transport_costs.csv
+│ └── travel_time.csv
+│
+├── src
+│ └── optimize_network.py
+│
+├── campus_map.png
+├── main.tex
+└── README.md
+
+
+---
+
+# Running the Project
+
+## Install Dependencies
+
+```bash
+pip install pandas pulp folium
+```
+---
+Run Optimization
+```bash
+python optimize_network.py
+```
+
+---
